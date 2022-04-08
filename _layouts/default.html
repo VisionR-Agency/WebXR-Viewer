@@ -94,50 +94,7 @@
                 //Activate current camera.
                 scene.activeCamera = orientationCamera;
                 scene.activeCamera.attachControl(canvas);
-              
-              var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-
-                var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
-                playButton.width = "100px";
-                playButton.height = "100px";
-                playButton.cornerRadius = 5;
-                playButton.color = "Orange";
-                playButton.thickness = 0;
-                playButton.background = "green";
-                playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-                playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-                playButton.top = "-2%";
-                playButton.left = "-2%";
-                advancedTexture.addControl(playButton);
-
-                /*var button1 = BABYLON.GUI.Button.CreateSimpleButton("but", "DeviceOrientation");
-                button1.width = "200px";
-                button1.height = "200px";
-                button1.color = "white";
-                button1.thickness = 0;
-                playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_;
-
-                advancedTexture.addControl(button1); */
-
-
-                playButton.onPointerUpObservable.add(function() {
-                    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
-        // (optional) Do something before API request prompt.
-        DeviceMotionEvent.requestPermission()
-            .then( response => {
-            // (optional) Do something after API prompt dismissed.
-            if ( response == "granted" ) {
-                window.addEventListener( "devicemotion", (e) => {
-                    //button1.textBlock.text = e.DeviceMotionEvent.absolute;
-                   // camera.rotation.x = e.alpha / 57.3;
-                })
-            }
-        })
-            .catch( console.error )
-    } else {
-        alert( "DeviceMotionEvent is not defined" );
-    }
-                });
+             
             
                 //Dome used to display a 360 video.
                 var videoDome = new BABYLON.VideoDome(
@@ -172,17 +129,23 @@
                 fullscreenButton.left = "2%";
 
                 //Add an observer on the fullscreen button.
-                fullscreenButton.onPointerUpObservable.add(function() {
-                    fullscreen = !fullscreen;
-
-                    if (fullscreen) {
-                        launchFullscreen();
-                        fullscreenButton.image.source = "./textures/smallScreen.png";
-                    }
-                    else {
-                        quitFullscreen();
-                        fullscreenButton.image.source = "./textures/fullScreen.svg";
-                    }
+               fullscreenButton.onPointerUpObservable.add(function() {
+                    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
+        // (optional) Do something before API request prompt.
+        DeviceMotionEvent.requestPermission()
+            .then( response => {
+            // (optional) Do something after API prompt dismissed.
+            if ( response == "granted" ) {
+                window.addEventListener( "devicemotion", (e) => {
+                    //button1.textBlock.text = e.DeviceMotionEvent.absolute;
+                   // camera.rotation.x = e.alpha / 57.3;
+                })
+            }
+        })
+            .catch( console.error )
+    } else {
+        alert( "DeviceMotionEvent is not defined" );
+    }
                 });
 
 
