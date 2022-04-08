@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>WebXR</title>
+
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <canvas id="renderCanvas"></canvas>
+
+        <script>
+            //Actual canvas rendered.
+            var canvas = document.getElementById("renderCanvas");
+
+            //Actual engine that renders this canvas.
+            var engine = null;
+
+            //Current scene loaded.
+            var scene = null;
+
+            //Size of all buttons.
+            var buttonSize = "80px";
+
+
+            //Does the app is currently fullscreen?
+            var fullscreen = false;
+
+            //Does the app is currently in free rotation mode?
+            var freeRotation = false;
+
+
+            //Scene loaded and rendered.
+            var sceneToRender = null;
+
+
+            //Function used to create a new Babylon engine.
+            var createDefaultEngine = function() { 
+                return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); 
+            };
+
+            //Function used to create the scene to render.
+            //Every behavior shuld be placed here.
+            var createScene = function () {
+                var scene = new BABYLON.Scene(engine);
+
+                //Add a camera that will handle touches and mouse events.
+                var touchCamera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, new BABYLON.Vector3(0, 1, 0), scene);
+
+                //Add a camera that will handle device orientation.
+                var orientationCamera = new BABYLON.DeviceOrientationCamera("DevOr_camera", new BABYLON.Vector3(0, 1, 0), scene);
+
+
+                // Targets the camera to a particular position.
+                touchCamera.setTarget(new BABYLON.Vector3(0, 0, -10));
+                orientationCamera.setTarget(new BABYLON.Vector3(0, 0, -10));
+
+                // Sets the sensitivity of the camera to movement and rotation.
+                touchCamera.angularSensibility = 10;
+                touchCamera.moveSensibility = 10;
+
+                //Activate current camera.
+                scene.activeCamera = orientationCamera;
+                scene.activeCamera.attachControl(canvas);
+            
+                //Dome used to display a 360 video.
+                var videoDome = new BABYLON.VideoDome(
+                    "videoDome",
+                    ["./textures/traineaau_insta.mp4"],
+                    {
+                        resolution: 32
+                    },
+                    scene
+                );
+
+                
+                //Texture used to display every UI elements and recover inputs.
+                var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+
+                /* * * * * * * * * * *
+                 * BUTTONS CREATION  *
+                 * * * * * * * * * * */
+                //Full screen button creation.
+                var fullscreenButton = BABYLON.GUI.Button.CreateImageButton("fullscreenButton", "", "./textures/fullScreen.svg");
+                fullscreenButton.width = buttonSize;
+                fullscreenButton.height = buttonSize;
+                fullscreenButton.image.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+                fullscreenButton.image.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+                fullscreenButton.image.scaleX = 5;
+                fullscreenButton.image.scaleY = 5;
+                fullscreenButton.thickness = 0;
+                fullscreenButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                fullscreenButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+                fullscreenButton.top = "-2%";
+                fullscreenButton.left = "2%";
+
+                //Add an observer on the fullscreen button.
+                fullscreenButton.onPointerUpObservable.add(function() {
+                    fullscreen = !fullscreen;
+
+                    if (fullscreen) {
+                        launchFullscreen();
+                        fullscreenButton.image.source = "./textures/smallScreen.png";
+                    }
+                    else {
+                        quitFullscreen();
+                        fullscreenButton.image.source = "./textures/fullScreen.svg";
+                    }
+                });
+
+
+                //Rotation button creation.
+                var rotationButton = BABYLON.GUI.Button.CreateImageButton("rotationButton", "", "./textures/refreshing.png");
+                rotationButton.width = buttonSize;
+                rotationButton.height = buttonSize;
+                rotationButton.image.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+                rotationButton.image.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+                rotationButton.image.scaleX = 5;
+                rotationButton.image.scaleY = 5;
+                rotationButton.thickness = 0;
+                rotationButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                rotationButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+                rotationButton.top = "-2%";
+                rotationButton.left = "-2%";
+
+                //Add an observer on the rotation button.
+                rotationButton.onPointerUpObservable.add(function() {
+                    freeRotation = !freeRotation;
+
+                    //Change rotation type.
+                    if (freeRotation)
+                        scene.activeCamera = touchCamera;
+                    else
+                        scene.activeCamera = orientationCamera;
+
+                    scene.activeCamera.attachControl(canvas);
+                });
+
+                //We add the buttons to the current texture.
+                advancedTexture.addControl(rotationButton);
+                advancedTexture.addControl(fullscreenButton);
+            
+                return scene;
+            };
+
+
+            //Function called to render the scene in a loop (each frame).
+            var startRenderLoop = function (engine, canvas) {
+                engine.runRenderLoop(function () {
+                    if (sceneToRender && sceneToRender.activeCamera) {
+                        sceneToRender.render();
+                    }
+                });
+            }
+
+
+            //Function called to initialize the window.
+            window.initFunction = async function() {
+                var asyncEngineCreation = async function() {
+                    try {
+                        return createDefaultEngine();
+                    } catch(e) {
+                        console.log("the available createEngine function failed. Creating the default engine instead");
+                        return createDefaultEngine();
+                    }
+                }
+
+                window.engine = await asyncEngineCreation();
+
+                if (!engine) 
+                    throw 'engine should not be null.';
+
+                startRenderLoop(engine, canvas);
+                window.scene = createScene();
+            };
+
+            //Function used to initialize the window and set the right scene to render.
+            initFunction().then(() => {
+                sceneToRender = scene                    
+            });
+
+            // CallBack called when a window resize is made.
+            window.addEventListener("resize", function () {
+                engine.resize();
+            });
+
+
+            //Function used to launch full screen.
+            function launchFullscreen(){	
+                var element = document.documentElement;
+
+                if(element.requestFullscreen)
+                    element.requestFullscreen();
+                else if(element.mozRequestFullScreen)	
+                    element.mozRequestFullScreen();
+                else if(element.webkitRequestFullscreen)		
+                    element.webkitRequestFullscreen();
+                else if(element.msRequestFullscreen)	
+                    element.msRequestFullscreen();
+            }	
+
+
+            //Function used to quit full screen.
+            function quitFullscreen(){	
+                var element = document.documentElement;   
+
+                if (document.exitFullscreen)
+                    document.exitFullscreen();
+                else if (document.webkitExitFullscreen)
+                    document.webkitExitFullscreen();
+                else if (document.msExitFullscreen)
+                    document.msExitFullscreen();
+            }
+        </script>
+    </body>
+</html>
