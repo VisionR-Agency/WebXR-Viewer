@@ -1,146 +1,128 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><title>WebXR</title>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <script src="https://preview.babylonjs.com/babylon.js"></script>
-    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <title>Babylon.js sample code</title>
 
-    <style>
-        html, body {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+        <!-- Babylon.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
 
-        #renderCanvas {
-            width: 100%;
-            height: 100%;
-            touch-action: none;
-        }
-    </style>
-
-{% seo %}
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    {% include head-custom.html %}
-  </head>
-  <body>
-    <div class="container-lg px-3 my-5 markdown-body">
-
-      {{ content }}
-
-      {% if site.github.private != true and site.github.license %}
-      <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
-        This site is open source. {% github_edit_link "Improve this page" %}.
-      </div>
-      {% endif %}
-    </div>
-    <canvas id="renderCanvas"></canvas>
-
-        <script>
-            //Actual canvas rendered.
-            var canvas = document.getElementById("renderCanvas");
-
-            //Actual engine that renders this canvas.
-            var engine = null;
-
-            //Current scene loaded.
-            var scene = null;
-
-            //Size of all buttons.
-            var buttonSize = "80px";
-
-
-            //Does the app is currently fullscreen?
-            var fullscreen = false;
-
-            //Does the app is currently in free rotation mode?
-            var freeRotation = false;
-
-
-            //Scene loaded and rendered.
-            var sceneToRender = null;
-
-
-            //Function used to create a new Babylon engine.
-            var createDefaultEngine = function() { 
-                return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); 
-            };
-
-            var createScene = function () {
-    var scene = new BABYLON.Scene(engine);
-    var camera = new BABYLON.DeviceOrientationCamera("camera", new BABYLON.Vector3(0, 0, 0), scene);
-            // Targets the camera to a particular positiion
-            camera.setTarget(new BABYLON.Vector3(0, 0, -10));
-            // Sets the sensitivity of the camera to movement and rotation
-            camera.angularSensibility = 10;
-            camera.moveSensibility = 10;
-            // Attach the camera to the canvas
-            camera.attachControl(canvas, true);
-    //var vrHelper = scene.createDefaultVRExperience();
-
-    var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-
-                var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
-                playButton.width = "100px";
-                playButton.height = "100px";
-                playButton.cornerRadius = 5;
-                playButton.color = "Orange";
-                playButton.thickness = 0;
-                playButton.background = "green";
-                playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-                playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-                playButton.top = "-2%";
-                playButton.left = "-2%";
-                advancedTexture.addControl(playButton);
-
-                /*var button1 = BABYLON.GUI.Button.CreateSimpleButton("but", "DeviceOrientation");
-                button1.width = "200px";
-                button1.height = "200px";
-                button1.color = "white";
-                button1.thickness = 0;
-                playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_;
-
-                advancedTexture.addControl(button1); */
-
-
-                playButton.onPointerUpObservable.add(function() {
-                    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
-        // (optional) Do something before API request prompt.
-        DeviceMotionEvent.requestPermission()
-            .then( response => {
-            // (optional) Do something after API prompt dismissed.
-            if ( response == "granted" ) {
-                window.addEventListener( "devicemotion", (e) => {
-                    //button1.textBlock.text = e.DeviceMotionEvent.absolute;
-                   // camera.rotation.x = e.alpha / 57.3;
-                })
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
             }
-        })
-            .catch( console.error )
-    } else {
-        alert( "DeviceMotionEvent is not defined" );
-    }
-                });
 
-    var dome = new BABYLON.PhotoDome(
-        "testdome",
-        "./textures/360photo.jpg",
-        {
-            resolution: 32,
-            size: 1000
-        },
-        scene
-    );
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
 
-    return scene;
-};
+        var startRenderLoop = function (engine, canvas) {
+            engine.runRenderLoop(function () {
+                if (sceneToRender && sceneToRender.activeCamera) {
+                    sceneToRender.render();
+                }
+            });
+        }
 
- window.initFunction = async function() {
+        var engine = null;
+        var scene = null;
+        var sceneToRender = null;
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        var createScene = function () {
+            var scene = new BABYLON.Scene(engine);
+            var camera = new BABYLON.DeviceOrientationCamera("camera", new BABYLON.Vector3(0, 0, 0), scene);
+                    // Targets the camera to a particular positiion
+                    camera.setTarget(new BABYLON.Vector3(0, 0, -10));
+                    // Sets the sensitivity of the camera to movement and rotation
+                    camera.angularSensibility = 10;
+                    camera.moveSensibility = 10;
+                    // Attach the camera to the canvas
+                    camera.attachControl(canvas, true);
+            //var vrHelper = scene.createDefaultVRExperience();
+        
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+        
+                        var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
+                        playButton.width = "100px";
+                        playButton.height = "100px";
+                        playButton.cornerRadius = 5;
+                        playButton.color = "Orange";
+                        playButton.thickness = 0;
+                        playButton.background = "green";
+                        playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                        playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+                        playButton.top = "-2%";
+                        playButton.left = "-2%";
+                        advancedTexture.addControl(playButton);
+        
+                        /*var button1 = BABYLON.GUI.Button.CreateSimpleButton("but", "DeviceOrientation");
+                        button1.width = "200px";
+                        button1.height = "200px";
+                        button1.color = "white";
+                        button1.thickness = 0;
+                        playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_;
+        
+                        advancedTexture.addControl(button1); */
+        
+        
+                        playButton.onPointerUpObservable.add(function() {
+                            if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
+                // (optional) Do something before API request prompt.
+                DeviceMotionEvent.requestPermission()
+                    .then( response => {
+                    // (optional) Do something after API prompt dismissed.
+                    if ( response == "granted" ) {
+                        window.addEventListener( "devicemotion", (e) => {
+                            //button1.textBlock.text = e.DeviceMotionEvent.absolute;
+                           // camera.rotation.x = e.alpha / 57.3;
+                        })
+                    }
+                })
+                    .catch( console.error )
+            } else {
+                alert( "DeviceMotionEvent is not defined" );
+            }
+                        });
+        
+            var dome = new BABYLON.PhotoDome(
+                "testdome",
+                "./textures/360photo.jpg",
+                {
+                    resolution: 32,
+                    size: 1000
+                },
+                scene
+            );
+        
+            return scene;
+        };
+                window.initFunction = async function() {
                     
                     
                     var asyncEngineCreation = async function() {
@@ -156,20 +138,13 @@
         if (!engine) throw 'engine should not be null.';
         startRenderLoop(engine, canvas);
         window.scene = createScene();};
-        initFunction().then(() => {sceneToRender = scene                   
+        initFunction().then(() => {sceneToRender = scene                    
         });
 
         // Resize
         window.addEventListener("resize", function () {
             engine.resize();
         });
-
-        window.addEventListener("deviceorientation", (e) => {
-            button1.textBlock.text = e.absolute;
-        })
-
     </script>
 </body>
 </html>
-               
-                
