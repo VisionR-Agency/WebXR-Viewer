@@ -135,15 +135,20 @@
             
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
-                       var text0 = new BABYLON.GUI.TextBlock("Text0", "Text 0");
-                        text0.color = "white";
-                        text0.fontSize = 0.1;
-                        adt.addControl(text0);
+                        var rect1 = new BABYLON.GUI.Rectangle();
+                        rect1.width = 0.2;
+                        rect1.height = "40px";
+                        rect1.cornerRadius = 20;
+                        rect1.color = "white";
+                        rect1.thickness = 4;
+                        rect1.background = "green";
+                        advancedTexture.addControl(rect1); 
                         
                         var globeMarker = new BABYLON.Mesh("globeMarker", scene);
                         globeMarker.position = new BABYLON.Vector3(0,0.100000001490116,2.7885000705719);
                         
-                        text0.linkWithMesh(globeMarker);
+                        rect1.linkWithMesh(globeMarker);
+                        rect1.linkOffsetY = -150;
         
             return scene;
         };
