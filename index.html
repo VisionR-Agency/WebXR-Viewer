@@ -113,10 +113,6 @@
                 scene
             );
 
-             // ----------------------------------------------- VIDEO TEXTURES -------------------------------------------------
-
-                
-
              // ----------------------------------------------- CHANGE VIDEO BUTTON -------------------------------------------------
 
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("changebut", "Other Video");
@@ -136,6 +132,17 @@
                         changeVideo.onPointerUpObservable.add(function() {
                             dome.videoTexture.updateURL("./textures/gemab2021_02_BD.mov");
                         });
+            
+             // ----------------------------------------------- TAGS ------------------------------------------------- 
+                        
+                        var path0 = new BABYLON.Vector3(0, 30, 10);
+                        var text0 = new BABYLON.GUI.TextBlock("TAG1", "TAG");
+                        text0.color = "white";
+                        text0.fontSize = 48;
+                        adt.addControl(text0);
+                        let transform1 = new BABYLON.TransformNode('t');
+                        transform1.position.copyFrom(path0);
+                        text0.linkWithMesh(transform1);
         
             return scene;
         };
