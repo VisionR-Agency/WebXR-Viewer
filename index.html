@@ -67,6 +67,8 @@
             //var vrHelper = scene.createDefaultVRExperience();
         
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+
+                   // ----------------------------------------------- BUTTONS -------------------------------------------------
         
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
                         playButton.width = "100px";
@@ -79,7 +81,18 @@
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
                         playButton.top = "-10%";
                         playButton.left = "-10%";
-                        advancedTexture.addControl(playButton);       
+                        advancedTexture.addControl(playButton);
+                        
+                        var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("but2", "Other Video");
+                        playButton.width = "100px";
+                        playButton.height = "100px";
+                        playButton.cornerRadius = 10;
+                        playButton.color = "white";
+                        playButton.thickness = 0;
+                        playButton.background = "green";
+                        playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                        playButton.top = "-10%";
+                        advancedTexture.addControl(changeVideo);
         
                         playButton.onPointerUpObservable.add(function() {
                             if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
@@ -102,7 +115,7 @@
         
             var dome = new BABYLON.VideoDome(
                 "videodome",
-                "./textures/ChienTraineau_youtubeVISIONR_injected.mp4",
+                "./textures/gemab2021_01_BD.mp4",
                 {
                     resolution: 32,
                     size: 1000
