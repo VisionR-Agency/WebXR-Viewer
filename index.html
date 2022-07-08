@@ -75,7 +75,7 @@
                         playButton.height = "80px";
                         playButton.cornerRadius = 10;
                         playButton.color = "white";
-                        playButton.thickness = 0;
+                        playButton.thickness = 2;
                         playButton.background = "green";
                         playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -120,7 +120,7 @@
                         changeVideo.height = "80px";
                         changeVideo.cornerRadius = 10;
                         changeVideo.color = "white";
-                        changeVideo.thickness = 0;
+                        changeVideo.thickness = 2;
                         changeVideo.background = "green";
                         changeVideo.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         changeVideo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
@@ -135,7 +135,7 @@
             
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
-                        var rect1 = new BABYLON.GUI.Rectangle();
+                        var rect1 = BABYLON.GUI.Button.CreateSimpleButton("tagbutton", "Click Me");
                         rect1.width = 0.2;
                         rect1.height = "40px";
                         rect1.cornerRadius = 20;
@@ -149,6 +149,12 @@
                         
                         rect1.linkWithMesh(globeMarker);
                         rect1.linkOffsetY = -150;
+                        
+                        // Add an observer to the tag video button.
+                        rect1.onPointerUpObservable.add(function() {
+                            
+                        });
+
         
             return scene;
         };
