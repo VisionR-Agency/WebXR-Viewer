@@ -71,25 +71,15 @@
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
                         playButton.width = "100px";
                         playButton.height = "100px";
-                        playButton.cornerRadius = 5;
-                        playButton.color = "Orange";
+                        playButton.cornerRadius = 10;
+                        playButton.color = "white";
                         playButton.thickness = 0;
                         playButton.background = "green";
                         playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-                        playButton.top = "-2%";
-                        playButton.left = "-2%";
-                        advancedTexture.addControl(playButton);
-        
-                        /*var button1 = BABYLON.GUI.Button.CreateSimpleButton("but", "DeviceOrientation");
-                        button1.width = "200px";
-                        button1.height = "200px";
-                        button1.color = "white";
-                        button1.thickness = 0;
-                        playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_;
-        
-                        advancedTexture.addControl(button1); */
-        
+                        //playButton.top = "-2%";
+                        //playButton.left = "-2%";
+                        advancedTexture.addControl(playButton);       
         
                         playButton.onPointerUpObservable.add(function() {
                             if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
