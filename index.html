@@ -68,7 +68,7 @@
         
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
-                   // ----------------------------------------------- BUTTONS -------------------------------------------------
+            // ----------------------------------------------- DEVICE MOTION BUTTON -------------------------------------------------
         
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
                         playButton.width = "80px";
@@ -85,22 +85,35 @@
         
                         playButton.onPointerUpObservable.add(function() {
                             if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
-                // (optional) Do something before API request prompt.
-                DeviceMotionEvent.requestPermission()
-                    .then( response => {
-                    // (optional) Do something after API prompt dismissed.
-                    if ( response == "granted" ) {
-                        window.addEventListener( "devicemotion", (e) => {
-                            //button1.textBlock.text = e.DeviceMotionEvent.absolute;
-                           // camera.rotation.x = e.alpha / 57.3;
-                        })
-                    }
-                })
-                    .catch( console.error )
-            } else {
-                alert( "DeviceMotionEvent is not defined" );
-            }
+                                // (optional) Do something before API request prompt.
+                                 DeviceMotionEvent.requestPermission()
+                            .then( response => {
+                                // (optional) Do something after API prompt dismissed.
+                                if ( response == "granted" ) {
+                                    window.addEventListener( "devicemotion", (e) => {
+                                        })
+                                    }
+                                })
+                                    .catch( console.error )
+                                } else {
+                                    alert( "DeviceMotionEvent is not defined" );
+                            }
                         });
+
+
+             // ----------------------------------------------- VIDEO DOME -------------------------------------------------
+        
+            var dome = new BABYLON.VideoDome(
+                "videodome",
+                "./textures/gemab2021_01_BD.mov",
+                {
+                    resolution: 32,
+                    size: 1000
+                },
+                scene
+            );
+
+             // ----------------------------------------------- CHANGE VIDEO BUTTON -------------------------------------------------
 
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("changebut", "Other Video");
                         changeVideo.width = "80px";
@@ -114,16 +127,18 @@
                         changeVideo.top = "-2%";
                         changeVideo.left = "-2%";
                         advancedTexture.addControl(changeVideo);
-        
-            var dome = new BABYLON.VideoDome(
-                "videodome",
-                "./textures/gemab2021_01_BD.mov",
-                {
-                    resolution: 32,
-                    size: 1000
-                },
-                scene
-            );
+            
+                        // Add an observer to the change video button.
+                        changeVideo.onPointerUpObservable.add(function() {
+                            dome = new BABYLON.VideoDome(
+                            "videodome2",
+                            "./textures/geman2021_02_BD.mov",
+                            {
+                                resolution: 32,
+                                size: 1000
+                            }
+                            );
+                        })
         
             return scene;
         };
