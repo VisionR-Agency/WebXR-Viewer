@@ -102,7 +102,7 @@
             }
                         });
 
-                       /* var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("but2", "Other Video");
+                        var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("changebut", "Other Video");
                         changeVideo.width = "80px";
                         changeVideo.height = "80px";
                         changeVideo.cornerRadius = 10;
@@ -112,7 +112,8 @@
                         changeVideo.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         changeVideo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
                         changeVideo.top = "-2%";
-                        changeVideo.left = "-2%"; */
+                        changeVideo.left = "-2%";
+                        advancedTexture.addControl(changeVideo);
         
             var dome = new BABYLON.VideoDome(
                 "videodome",
