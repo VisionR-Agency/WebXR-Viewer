@@ -71,16 +71,16 @@
                    // ----------------------------------------------- BUTTONS -------------------------------------------------
         
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
-                        playButton.width = "40px";
-                        playButton.height = "40px";
+                        playButton.width = "80px";
+                        playButton.height = "80px";
                         playButton.cornerRadius = 10;
                         playButton.color = "white";
                         playButton.thickness = 0;
                         playButton.background = "green";
                         playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
-                        playButton.top = "-10%";
-                        playButton.left = "-10%";
+                        playButton.top = "-2%";
+                        playButton.left = "2%";
                         advancedTexture.addControl(playButton);
         
                         playButton.onPointerUpObservable.add(function() {
@@ -103,15 +103,16 @@
                         });
 
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("but2", "Other Video");
-                        changeVideo.width = "40px";
-                        changeVideo.height = "40px";
+                        changeVideo.width = "80px";
+                        changeVideo.height = "80px";
                         changeVideo.cornerRadius = 10;
                         changeVideo.color = "white";
                         changeVideo.thickness = 0;
                         changeVideo.background = "green";
                         changeVideo.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         changeVideo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
-                        changeVideo.top = "-10%";
+                        changeVideo.top = "-2%";
+                        changeVideo.left = "-2%";
         
             var dome = new BABYLON.VideoDome(
                 "videodome",
