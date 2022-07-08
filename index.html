@@ -135,14 +135,13 @@
             
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
-                        var path0 = new BABYLON.Vector3(0, 30, 10);
-                        var text0 = new BABYLON.GUI.TextBlock("TAG1", "TAG");
+                        var text0 = new BABYLON.GUI.TextBlock("Text0", "Text 0");
                         text0.color = "white";
-                        text0.fontSize = 0.1;
+                        text0.fontSize = 12;
                         adt.addControl(text0);
-                        let transform1 = new BABYLON.TransformNode('t');
-                        transform1.position.copyFrom(path0);
-                        text0.linkWithMesh(transform1);
+                        var transform0 = new BABYLON.TransformNode("Transform0", scene);
+                        transform0.position = new BABYLON.Vector3(0,0.100000001490116,2.7885000705719);
+                        text0.linkWithMesh(transform0); 
         
             return scene;
         };
