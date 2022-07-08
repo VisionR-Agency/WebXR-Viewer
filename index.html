@@ -113,6 +113,10 @@
                 scene
             );
 
+             // ----------------------------------------------- VIDEO TEXTURES -------------------------------------------------
+
+                
+
              // ----------------------------------------------- CHANGE VIDEO BUTTON -------------------------------------------------
 
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("changebut", "Other Video");
@@ -130,7 +134,7 @@
             
                         // Add an observer to the change video button.
                         changeVideo.onPointerUpObservable.add(function() {
-                            dome.photoTexture = new BABYLON.Texture("./textures/360photo.jpg");
+                            dome.videoTexture.updateURL = ("./textures/gemab2021_02_BD.mov");
                         });
         
             return scene;
