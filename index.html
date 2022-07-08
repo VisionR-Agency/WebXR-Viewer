@@ -71,11 +71,11 @@
                    // ----------------------------------------------- BUTTONS -------------------------------------------------
         
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
-                        playButton.width = "100px";
-                        playButton.height = "100px";
+                        playButton.width = "40px";
+                        playButton.height = "40px";
                         playButton.cornerRadius = 10;
                         playButton.color = "white";
-                        playButton.thickness = 0;
+                        playButton.thickness = 1;
                         playButton.background = "green";
                         playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
@@ -84,14 +84,15 @@
                         advancedTexture.addControl(playButton);
                         
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("but2", "Other Video");
-                        playButton.width = "100px";
-                        playButton.height = "100px";
-                        playButton.cornerRadius = 10;
-                        playButton.color = "white";
-                        playButton.thickness = 0;
-                        playButton.background = "green";
-                        playButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-                        playButton.top = "-10%";
+                        changeVideo.width = "40px";
+                        changeVideo.height = "40px";
+                        changeVideo.cornerRadius = 10;
+                        changeVideo.color = "white";
+                        changeVideo.thickness = 1;
+                        changeVideo.background = "green";
+                        changeVideo.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                        changeVideo.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+                        changeVideo.top = "-10%";
                         advancedTexture.addControl(changeVideo);
         
                         playButton.onPointerUpObservable.add(function() {
