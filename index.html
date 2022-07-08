@@ -81,7 +81,7 @@
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
                         playButton.top = "-2%";
                         playButton.left = "2%";
-                        advancedTexture.addControl(playButton);
+                        //advancedTexture.addControl(playButton);
         
                         playButton.onPointerUpObservable.add(function() {
                             if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
@@ -116,7 +116,7 @@
         
             var dome = new BABYLON.VideoDome(
                 "videodome",
-                "./textures/gemab2021_01_BD.mp4",
+                "./textures/gemab2021_01_BD.mov",
                 {
                     resolution: 32,
                     size: 1000
