@@ -70,7 +70,7 @@
 
                    // ----------------------------------------------- BUTTONS -------------------------------------------------
         
-                        var playButton = BABYLON.GUI.Button.CreateSimpleButton("but", "Play");
+                        var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
                         playButton.width = "80px";
                         playButton.height = "80px";
                         playButton.cornerRadius = 10;
@@ -81,6 +81,7 @@
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
                         playButton.top = "-2%";
                         playButton.left = "2%";
+                        advancedTexture.addControl(playButton)
         
                         playButton.onPointerUpObservable.add(function() {
                             if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
