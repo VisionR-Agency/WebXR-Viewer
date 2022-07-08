@@ -130,14 +130,7 @@
             
                         // Add an observer to the change video button.
                         changeVideo.onPointerUpObservable.add(function() {
-                            dome = new BABYLON.PhotoDome(
-                            "photoDome",
-                            "./textures/360photo.jpg",
-                            {
-                                resolution: 32,
-                                size: 1000
-                            }
-                            );
+                            dome.photoTexture = new BABYLON.Texture("./textures/360photo.jpg");
                         });
         
             return scene;
