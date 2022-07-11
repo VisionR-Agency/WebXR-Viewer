@@ -132,15 +132,13 @@
                         changeVideo.onPointerUpObservable.add(function() {
                             dome.videoTexture.updateURL("./textures/gemab2021_02_BD.mov");
                         });
-             // ------------------------------------------- UI FOR TAGS --------------------------------------------------
+             // ------------------------------------------- UI FOR TAG 1 --------------------------------------------------
 
                         var rectangle = new BABYLON.GUI.Rectangle("rect");
                         rectangle.background = "black";
                         rectangle.color = "white";
                         rectangle.width = "200px";
                         rectangle.height = "300px";
-
-                        //advancedTexture.addControl(rectangle);
 
                         var text1 = new BABYLON.GUI.TextBlock("text1");
     
@@ -152,7 +150,7 @@
                         text1.fontSize = "18px";
                         rectangle.addControl(text1);
 
-             // ----------------------------------------------- TAGS ------------------------------------------------- 
+             // ----------------------------------------------- TAG 1 ------------------------------------------------- 
                         
                         var rect1 = BABYLON.GUI.Button.CreateSimpleButton("tagbutton", "Click Me");
                         rect1.width = 0.2;
@@ -186,6 +184,45 @@
                                 advancedTexture.removeControl(rectangle);
                                 test = 1;
                             }
+                        });
+
+            // ------------------------------------------- UI FOR TAG 2 --------------------------------------------------
+
+                        var rectangle2 = new BABYLON.GUI.Rectangle("rect2");
+                        rectangle2.background = "black";
+                        rectangle2.color = "white";
+                        rectangle2.width = window.innerWidth;
+                        rectangle2.height = window.innerHeight;
+
+                        var text2 = new BABYLON.GUI.TextBlock("text2");
+    
+                        text2.fontFamily = "Helvetica";
+                        text2.textWrapping = true;
+    
+                        text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+                        text2.color = "white";
+                        text2.fontSize = "18px";
+                        rectangle.addControl(text2);
+
+             // ----------------------------------------------- TAG 2 ------------------------------------------------- 
+                        
+                        var rect2 = BABYLON.GUI.Button.CreateSimpleButton("tag2button", "Fullscreen");
+                        rect2.width = 0.2;
+                        rect2.height = "50px";
+                        rect2.cornerRadius = 20;
+                        rect2.color = "white";
+                        rect2.thickness = 4;
+                        rect2.background = "red";
+                        advancedTexture.addControl(rect2); 
+                        
+                        var globeMarker2 = new BABYLON.Mesh("globe2Marker", scene);
+                        globeMarker2.position = new BABYLON.Vector3(0.1,-0.100000001490116,2.7885000705719);
+                        
+                        rect1.linkWithMesh(globeMarker2);
+                        
+                        // Add an observer to the tag video button.
+                        rect2.onPointerUpObservable.add(function() {
+                            advancedTexture.addControl(rectangle2);   
                         });
 
         
