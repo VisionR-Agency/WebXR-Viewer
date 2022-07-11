@@ -151,7 +151,7 @@
                         text1.color = "white";
                         text1.fontSize = "18px";
                         rectangle.addControl(text1);
-                        rectangle.isVisible(false);
+                        rectangle.isEnabled(false);
 
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
@@ -172,7 +172,7 @@
                         
                         // Add an observer to the tag video button.
                         rect1.onPointerUpObservable.add(function() {
-                           rectangle.setEnabled(true); 
+                           rectangle.isEnabled(true); 
                         });
 
         
