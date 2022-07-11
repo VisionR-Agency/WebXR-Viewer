@@ -202,7 +202,7 @@
                         text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
                         text2.color = "white";
                         text2.fontSize = "18px";
-                        rectangle.addControl(text2);
+                        rectangle2.addControl(text2);
 
              // ----------------------------------------------- TAG 2 ------------------------------------------------- 
                         
@@ -219,6 +219,7 @@
                         globeMarker2.position = new BABYLON.Vector3(0.1,-0.100000001490116,2.7885000705719);
                         
                         rect2.linkWithMesh(globeMarker2);
+                        rect2.linkOffsetY = 100;
                         
                         // Add an observer to the tag video button.
                         rect2.onPointerUpObservable.add(function() {
