@@ -140,7 +140,7 @@
                         rectangle.width = "200px";
                         rectangle.height = "300px";
 
-                        advancedTexture.addControl(rectangle);
+                        //advancedTexture.addControl(rectangle);
 
                         var text1 = new BABYLON.GUI.TextBlock("text1");
     
@@ -151,7 +151,6 @@
                         text1.color = "white";
                         text1.fontSize = "18px";
                         rectangle.addControl(text1);
-                        //rectangle.setEnabled(false);
 
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
@@ -170,9 +169,21 @@
                         rect1.linkWithMesh(globeMarker);
                         rect1.linkOffsetY = -150;
                         
+                        var text = 1;
+                        
                         // Add an observer to the tag video button.
                         rect1.onPointerUpObservable.add(function() {
-                           //rectangle.isEnabled(true); 
+                            if (text == 1)
+                            {
+                                rect1.addControl(rectangle);
+                                test = 0;
+                                return;
+                            }
+                            if(text == 0)
+                            {
+                                rect1.removeControl(rectangle);
+                                test = 1;
+                            }
                         });
 
         
