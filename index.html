@@ -166,7 +166,6 @@
                         var globeMarker = new BABYLON.Mesh("globeMarker", scene);
                         globeMarker.position = new BABYLON.Vector3(0,0.100000001490116,2.7885000705719);
                         
-                        rect1.linkWithMesh(globeMarker);
                         rect1.linkOffsetY = -150;
 
                         rectangle.linkWithMesh(globeMarker);
@@ -178,6 +177,7 @@
                             if (text == 1)
                             {
                                 advancedTexture.addControl(rectangle);
+                                rectangle.linkWithMesh(globeMarker);
                                 test = 0;
                                 return;
                             }
