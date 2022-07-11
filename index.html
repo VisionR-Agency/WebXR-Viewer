@@ -69,9 +69,10 @@
             var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
             // ----------------------------------------------- DEVICE MOTION BUTTON -------------------------------------------------
-        
+
+                        // Button design
                         var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
-                        playButton.width = "80px";
+                        playButton.width = "80px"; 
                         playButton.height = "80px";
                         playButton.cornerRadius = 10;
                         playButton.color = "white";
@@ -81,6 +82,8 @@
                         playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
                         playButton.top = "-2%";
                         playButton.left = "2%";
+
+                        // Link button to a parent. (AdvancedTexture is the screen root container)
                         advancedTexture.addControl(playButton)
         
                         playButton.onPointerUpObservable.add(function() {
@@ -102,9 +105,10 @@
 
 
              // ----------------------------------------------- VIDEO DOME -------------------------------------------------
-        
+            
             var dome = new BABYLON.VideoDome(
                 "videodome",
+                //name of the .mp4
                 "./textures/gemab2021_01_BD.mov",
                 {
                     resolution: 32,
@@ -115,6 +119,7 @@
 
              // ----------------------------------------------- CHANGE VIDEO BUTTON -------------------------------------------------
 
+                        // Button design
                         var changeVideo = BABYLON.GUI.Button.CreateSimpleButton("changebut", "Other Video");
                         changeVideo.width = "80px";
                         changeVideo.height = "80px";
