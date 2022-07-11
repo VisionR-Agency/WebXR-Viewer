@@ -132,7 +132,24 @@
                         changeVideo.onPointerUpObservable.add(function() {
                             dome.videoTexture.updateURL("./textures/gemab2021_02_BD.mov");
                         });
-            
+             // ------------------------------------------- UI FOR TAGS --------------------------------------------------
+
+                        var rectangle = new BABYLON.GUI.Rectangle("rect");
+                        rectangle.background = "black";
+                        rectangle.color = "white";
+                        rectangle.width = "200px";
+                        rectangle.height = "300px";
+                        rectangle.position = new BABYLON.Vector3(0,0.100000001490116,2.7885000705719);
+
+                        advancedTexture.addControl(rectangle);
+
+                        var tegtext = new BABYLON.GUI.TextBlock("text");
+                        tagtext.text = "Mongolfière ..."
+                        tagtext.color = "white";
+                        tagtext.fontsize = "14px";
+                        rectangle.addControl(text1);
+                        rectangle.setEnabled(false);
+
              // ----------------------------------------------- TAGS ------------------------------------------------- 
                         
                         var rect1 = BABYLON.GUI.Button.CreateSimpleButton("tagbutton", "Click Me");
@@ -152,7 +169,7 @@
                         
                         // Add an observer to the tag video button.
                         rect1.onPointerUpObservable.add(function() {
-                            
+                           rectangle.setEnabled(true); 
                         });
 
         
