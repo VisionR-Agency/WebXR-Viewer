@@ -143,10 +143,14 @@
 
                         advancedTexture.addControl(rectangle);
 
-                        var tegtext = new BABYLON.GUI.TextBlock("text");
-                        tagtext.text = "Mongolfière ..."
-                        tagtext.color = "white";
-                        tagtext.fontsize = "14px";
+                        var text1 = new BABYLON.GUI.TextBlock("text1");
+    
+                        text1.fontFamily = "Helvetica";
+                        text1.textWrapping = true;
+    
+                        text1.text = "La mongolfière";
+                        text1.color = "white";
+                        text1.fontSize = "48px";
                         rectangle.addControl(text1);
                         //rectangle.setEnabled(false);
 
