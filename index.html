@@ -156,7 +156,7 @@
                         
                         var rect1 = BABYLON.GUI.Button.CreateSimpleButton("tagbutton", "Click Me");
                         rect1.width = 0.2;
-                        rect1.height = "40px";
+                        rect1.height = "50px";
                         rect1.cornerRadius = 20;
                         rect1.color = "white";
                         rect1.thickness = 4;
@@ -168,6 +168,8 @@
                         
                         rect1.linkWithMesh(globeMarker);
                         rect1.linkOffsetY = -150;
+
+                        rectangle.linkWithMesh(globeMarker);
                         
                         var text = 1;
                         
@@ -175,13 +177,13 @@
                         rect1.onPointerUpObservable.add(function() {
                             if (text == 1)
                             {
-                                rect1.addControl(rectangle);
+                                advancedTexture.addControl(rectangle);
                                 test = 0;
                                 return;
                             }
                             if(text == 0)
                             {
-                                rect1.removeControl(rectangle);
+                                advancedTexture.removeControl(rectangle);
                                 test = 1;
                             }
                         });
