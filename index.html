@@ -191,8 +191,6 @@
                         var rectangle2 = new BABYLON.GUI.Rectangle("rect2");
                         rectangle2.background = "black";
                         rectangle2.color = "white";
-                        //rectangle2.width = window.innerWidth;
-                        //rectangle2.height = window.innerHeight;
 
                         var text2 = new BABYLON.GUI.TextBlock("text2");
     
@@ -201,8 +199,26 @@
     
                         text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
                         text2.color = "white";
-                        text2.fontSize = "18px";
+                        text2.fontSize = "32px";
                         rectangle2.addControl(text2);
+
+                        var exit = BABYLON.GUI.Button.CreateSimpleButton("exit", "Back");
+                        exit.width = "80px";
+                        exit.height = "80px";
+                        exit.cornerRadius = 10;
+                        exit.color = "white";
+                        exit.thickness = 2;
+                        exit.background = "red";
+                        exit.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+                        exit.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+                        exit.top = "-2%";
+                        exit.left = "-2%";
+                        rectangle2.addControl(exit);
+            
+                        // Add an observer to the change video button.
+                        exit.onPointerUpObservable.add(function() {
+                            advancedTextur.removeControl(rectangle2);
+                        });
 
              // ----------------------------------------------- TAG 2 ------------------------------------------------- 
                         
