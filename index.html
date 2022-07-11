@@ -169,19 +169,19 @@
                         rect1.linkWithMesh(globeMarker);
                         rect1.linkOffsetY = -150;
                         
-                        var text = 1;
+                        var test = 1;
                         
                         // Add an observer to the tag video button.
                         rect1.onPointerUpObservable.add(function() {
-                            if (text == 1)
+                            if (test == 1)
                             {
                                 advancedTexture.addControl(rectangle);
                                 rectangle.linkWithMesh(globeMarker);
-                                rectangle.linkOffsetX = -150;
+                                rectangle.linkOffsetX = -200;
                                 test = 0;
                                 return;
                             }
-                            if(text == 0)
+                            if(test == 0)
                             {
                                 advancedTexture.removeControl(rectangle);
                                 test = 1;
