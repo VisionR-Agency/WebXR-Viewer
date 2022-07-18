@@ -85,12 +85,12 @@
                     "videoDome",
                     ["./textures/gemab2021_02_BD.mov"],
                     {
-                        resolution: 32,
-                        clickToPlay: true,
-                        muted: true
+                        resolution: 32
                     },
                     scene
                 );
+
+                videoDome.video.muted = true;
 
                 //Texture used to display every UI elements and recover inputs.
                 var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
