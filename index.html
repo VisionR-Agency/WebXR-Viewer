@@ -86,7 +86,7 @@
                     ["./textures/gemab2021_02_BD.mov"],
                     {
                         resolution: 32,
-                        clickToPlay: true
+                        autoPlay: false
                     },
                     scene
                 );
@@ -133,6 +133,25 @@
                         } else {
                             alert( "DeviceMotionEvent is not defined" );
                     }
+                });
+                
+                // Button design
+                var videoPlayButton = BABYLON.GUI.Button.CreateSimpleButton("videoBut", "Reset");
+                videoPlayButton.width = "80px"; 
+                videoPlayButton.height = "80px";
+                videoPlayButton.cornerRadius = 10;
+                videoPlayButton.color = "white";
+                videoPlayButton.thickness = 2;
+                videoPlayButton.background = "green";
+                videoPlayButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+                videoPlayButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+
+                // Link button to a parent. (AdvancedTexture is the screen root container)
+                advancedTexture.addControl(videoPlayButton)
+
+                videoPlayButton.onPointerUpObservable.add(function() {
+                    videoDome.videoTexture.video.play();
+                    videoPlayButton.dispose();
                 });
                 
                 //Full screen button creation.
