@@ -90,6 +90,8 @@
                     scene
                 );
 
+                videoDome.texture.video.muted = true;
+
                 //Texture used to display every UI elements and recover inputs.
                 var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
 
@@ -124,13 +126,33 @@
                 //Needs two of them
                 firstVideoButton.onPointerUpObservable.add(function() {
                     videoDome.texture.video.src="./textures/Video.mp4";
-                    videoDome.texture.video.play();
+
+                    var playPromise = videoDome.texture.video.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.then(function() {
+                            // Automatic playback started!
+                        }).catch(function(error) {
+                            // Automatic playback failed.
+                            // Show a UI element to let the user manually start playback.
+                        });
+                    }
                 });
                 
                 //Needs two of them
                 secondVideoButton.onPointerUpObservable.add(function() {
                     videoDome.texture.video.src="./textures/Video2.mp4";
-                    videoDome.texture.video.play();
+
+                    var playPromise = videoDome.texture.video.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.then(function() {
+                            // Automatic playback started!
+                        }).catch(function(error) {
+                            // Automatic playback failed.
+                            // Show a UI element to let the user manually start playback.
+                        });
+                    }
                 });
 
                 var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
