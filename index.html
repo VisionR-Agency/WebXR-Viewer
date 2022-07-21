@@ -123,12 +123,14 @@
                 
                 //Needs two of them
                 firstVideoButton.onPointerUpObservable.add(function() {
-                    videoDome.texture.video.src="https://yoda.blob.core.windows.net/videos/uptale360.mp4";
+                    videoDome.texture.video.src="./textures/Video.mp4";
+                    videoDome.texture.video.play();
                 });
                 
                 //Needs two of them
                 secondVideoButton.onPointerUpObservable.add(function() {
                     videoDome.texture.video.src="./textures/Video2.mp4";
+                    videoDome.texture.video.play();
                 });
 
                 var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
