@@ -123,32 +123,12 @@
                 
                 //Needs two of them
                 firstVideoButton.onPointerUpObservable.add(function() {
-                    videoDome.dispose();
-                    videoDome = new BABYLON.VideoDome(
-                        "testdome",
-                        ["./textures/Video.mp4"],
-                        {
-                            resolution: 16,
-                            clickToPlay: true,
-                            useDirectMapping: false
-                        },
-                        scene
-                    );
+                    videoDome.texture.video.src="https://yoda.blob.core.windows.net/videos/uptale360.mp4";
                 });
                 
                 //Needs two of them
                 secondVideoButton.onPointerUpObservable.add(function() {
-                    videoDome.dispose();
-                    videoDome = new BABYLON.VideoDome(
-                        "testdome",
-                        ["./textures/Video2.mp4"],
-                        {
-                            resolution: 16,
-                            clickToPlay: true,
-                            useDirectMapping: false
-                        },
-                        scene
-                    );
+                    videoDome.texture.video.src="./textures/Video2.mp4";
                 });
 
                 var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
