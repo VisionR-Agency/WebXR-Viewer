@@ -83,7 +83,7 @@
                 //Dome used to display a 360 video.
                 var videoDome = new BABYLON.VideoDome(
                     "videoDome",
-                    ["https://yoda.blob.core.windows.net/videos/uptale360.mp4"],
+                    ["./textures/Video.mp4"],
                     {
                         resolution: 32
                     },
@@ -97,12 +97,63 @@
                 /* * * * * * * * * * *
                  * BUTTONS CREATION  *
                  * * * * * * * * * * */
-                
                 // ----------------------------------------------- DEVICE MOTION BUTTON -------------------------------------------------
                 // Button design
+                var firstVideoButton = BABYLON.GUI.Button.CreateSimpleButton("firstVideo", "Vidéo 1");
+                firstVideoButton.width = buttonSize; 
+                firstVideoButton.height = buttonSize;
+                firstVideoButton.cornerRadius = 10;
+                firstVideoButton.color = "white";
+                firstVideoButton.thickness = 2;
+                firstVideoButton.background = "green";
+                firstVideoButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+                firstVideoButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+                firstVideoButton.left = "20%";
+
+                var secondVideoButton = BABYLON.GUI.Button.CreateSimpleButton("secondVideo", "Vidéo 2");
+                secondVideoButton.width = buttonSize; 
+                secondVideoButton.height = buttonSize;
+                secondVideoButton.cornerRadius = 10;
+                secondVideoButton.color = "white";
+                secondVideoButton.thickness = 2;
+                secondVideoButton.background = "green";
+                secondVideoButton.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_CENTER;
+                secondVideoButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_CENTER;
+                secondVideoButton.left = "-20%";
+                
+                //Needs two of them
+                firstVideoButton.onPointerUpObservable.add(function() {
+                    videoDome.dispose();
+                    videoDome = new BABYLON.VideoDome(
+                        "testdome",
+                        ["./textures/Video.mp4"],
+                        {
+                            resolution: 16,
+                            clickToPlay: true,
+                            useDirectMapping: false
+                        },
+                        scene
+                    );
+                });
+                
+                //Needs two of them
+                secondVideoButton.onPointerUpObservable.add(function() {
+                    videoDome.dispose();
+                    videoDome = new BABYLON.VideoDome(
+                        "testdome",
+                        ["./textures/Video2.mp4"],
+                        {
+                            resolution: 16,
+                            clickToPlay: true,
+                            useDirectMapping: false
+                        },
+                        scene
+                    );
+                });
+
                 var playButton = BABYLON.GUI.Button.CreateSimpleButton("playbut", "Play");
-                playButton.width = "80px"; 
-                playButton.height = "80px";
+                playButton.width = buttonSize; 
+                playButton.height = buttonSize;
                 playButton.cornerRadius = 10;
                 playButton.color = "white";
                 playButton.thickness = 2;
@@ -111,9 +162,6 @@
                 playButton.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
                 playButton.top = "2%";
                 playButton.left = "2%";
-
-                // Link button to a parent. (AdvancedTexture is the screen root container)
-                advancedTexture.addControl(playButton)
 
                 playButton.onPointerUpObservable.add(function() {
                     if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
@@ -191,6 +239,9 @@
                 //We add the buttons to the current texture.
                 advancedTexture.addControl(rotationButton);
                 advancedTexture.addControl(fullscreenButton);
+                advancedTexture.addControl(firstVideoButton);
+                advancedTexture.addControl(playButton);
+                advancedTexture.addControl(secondVideoButton);
             
                 return scene;
             };
